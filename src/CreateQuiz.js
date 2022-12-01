@@ -20,7 +20,7 @@ const CreateQuiz = () => {
     e.preventDefault();
     let quiz = { quizTitle, quizDesc, questions };
     console.log(quiz);
-    fetch(`http://localhost:4000/createQuiz`, {
+    fetch(process.env.API_URL+"/quiz", {
       method: "Post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(quiz),

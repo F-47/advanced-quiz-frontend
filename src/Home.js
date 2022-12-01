@@ -2,7 +2,7 @@ import SingleQuiz from "./SingleQuiz";
 import useFetch from "./useFetch";
 
 const Home = () => {
-  let {data,isPending,error} = useFetch("http://localhost:4000/getAllQuizes")
+  let {data,isPending,error} = useFetch(process.env.API_URL+"/quiz")
   
   if(isPending){
     return <div className="loading"></div>
