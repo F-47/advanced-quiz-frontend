@@ -15,12 +15,13 @@ const CreateQuiz = () => {
       ],
     },
   ]);
+  console.log(process.env.REACT_APP_API_URL)
 
   let handleSubmit = (e) => {
     e.preventDefault();
     let quiz = { quizTitle, quizDesc, questions };
     console.log(quiz);
-    fetch(process.env.API_URL+"/quiz", {
+    fetch(process.env.REACT_APP_API_URL+"/quiz", {
       method: "Post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(quiz),

@@ -7,7 +7,7 @@ const Quiz = () => {
   let { id } = useParams();
   let [showScore, setShowScore] = useState(false);
   let [score, setScore] = useState(0);
-  let { isPending, data } = useFetch(process.env.API_URL+"/quiz"+id);
+  let { isPending, data } = useFetch(process.env.REACT_APP_API_URL+"/quiz/"+id);
   console.log(data)
 
   if (isPending) {
