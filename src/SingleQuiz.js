@@ -1,6 +1,6 @@
 import cardBg from "./cardBg.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faEllipsis, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 const SingleQuiz = ({ quizes }) => {
   return (
