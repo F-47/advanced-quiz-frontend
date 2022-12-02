@@ -8,7 +8,6 @@ const Quiz = () => {
   let [showScore, setShowScore] = useState(false);
   let [score, setScore] = useState(0);
   let { isPending, data } = useFetch(process.env.REACT_APP_API_URL+"/quiz/"+id);
-  console.log(data)
 
   if (isPending) {
     return <div className="loading"></div>;
@@ -39,7 +38,6 @@ const Quiz = () => {
               <span>/{length}</span>
             </div>
             <div className="thequestion">
-              {/* {data.questions[currentQuestion]} */}
               {data.questions[currentQuestion].question}
             </div>
           </div>

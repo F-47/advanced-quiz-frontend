@@ -1,4 +1,4 @@
-import SingleQuiz from "./SingleQuiz";
+import Quizes from "./Quizes";
 import useFetch from "./useFetch";
 
 const Home = () => {
@@ -10,10 +10,8 @@ const Home = () => {
   return (
     <div className="home">
       <div className="container">
-        <div className="quizes">
-          <SingleQuiz quizes={data}/>
+          <Quizes quizes={data}/>
         </div>
-      </div>
     </div>
   );
 };

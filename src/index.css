@@ -5,18 +5,30 @@ body {
 }
 
 :root {
-  --main-color: #2b8a83;
+  --main-color: #2c3558;
 }
 ul {
   list-style-type: none;
 }
 a {
   text-decoration: none;
+  color: black;
 }
 .container {
   padding-inline: 5rem;
   padding-block: 1rem;
   margin: auto;
+}
+button{
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+textarea{
+  resize: none;
+  padding: 8px;
 }
 
 /* Loading  */
@@ -42,6 +54,8 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: -16px 7px 20px 11px #558fae;;
+  margin-bottom: 60px;
 }
 .navbar .logo img {
   max-width: 50px;
@@ -61,66 +75,69 @@ a {
 /* End Navbar  */
 
 /* Start Form  */
+label , .answerInput{
+  margin-bottom: 10px;
+}
 form {
-  max-width: 400px;
+  max-width: 700px;
   margin: 0 auto;
 }
-form input,
-textarea {
-  box-sizing: border-box;
-  display: block;
-  max-width: 100%;
-  width: 100% ;
-  margin: 10px 0;
-  padding: 8px;
+input,textarea{
   outline: none;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
 }
-form label {
-  display: block;
-  margin-top: 24px;
+form label{
+  font-size: 25px;
+  font-weight: 500;
 }
-form textarea {
-  height: 120px;
-  resize: none;
-}
-form button {
-  margin-top: 20px;
-  background: var(--main-color);
-  border-radius: 6px;
-  color: white;
-  padding: 6px;
-  border: 0;
-  font-size: 1em;
-  cursor: pointer;
-  margin: 3px;
-}
-
-form .answers{
-  margin-top: 10px;
-}
-
-form .answers .answer{
+form .formFields,form .formFields .box .question{
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
-form .answers .answer input{
+form .formFields input,
+form .formFields .box .question input{
+  padding: 15px;
+}
+form .answersContainer{
+  margin-bottom: 30px;
+}
+form .answersContainer .answerInput{
   width: fit-content;
+  padding: 6px;
+  border-bottom: 3px solid rgb(0 100 114);
 }
-form .answers .answer label{
-  margin-top: 0;
-  margin-left: 10px;
+form .answersContainer .answerInput input[type="text"]{
+  padding: 8px;
+  background-color: transparent;
 }
-form .answerInput{
-  position: relative;
+form .answersContainer .answerInput input[type="text"]::placeholder{
+  color: rgb(66, 66, 66);
 }
-form .answerInput .plusIcon{
-  position: absolute;
-  right: 0px;
-  top: 50%;
-  cursor: pointer;
-  transform: translateY(-50%);
+form .answersContainer .answerInput input[type="radio"]:checked{
+  accent-color: #4e6cf0;
 }
-
+form .formFields .box{
+  margin-bottom: 20px;
+}
+form .formFields .box .btns{
+  display: flex;
+  flex-wrap: wrap;
+}
+form .formFields .box .btns button{
+  margin-left: 20px;
+  font-size: 15px;
+  padding: 10px;
+  margin-bottom: 6px;
+}
+form .formFields .box .btns .addNewQuestionBtn{
+  display: flex;
+}
+form .formFields .box .btns .addAnswer span{
+  margin-right: 7px;
+}
 /* End Form  */
 
 /* Start Quizes */
@@ -133,6 +150,24 @@ form .answerInput .plusIcon{
 /* End Quizes */
 
 /* Start Quiz */
+.noQuizes{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.noQuizes img{
+  max-width: 500px;
+  width: 100%;
+}
+.noQuizes h2{
+  font-size: 35px;
+  color: #2c3558;
+}
+.noQuizes a{
+  text-decoration: underline;
+  font-size: 22px;
+}
 .quiz {
   background-color: white;
   padding: 20px;
@@ -151,47 +186,25 @@ form .answerInput .plusIcon{
   color: var(--main-color);
   font-size: 25px;
   font-weight: bold;
+  text-transform: capitalize;
 }
 .quiz .cardBody .quizDesc {
   margin-block: 10px;
+  word-wrap: break-word;
+  text-transform: capitalize;
 }
 .quiz .cardFooter {
   display: flex;
   justify-content: space-between;
   font-size: 22px;
 }
-.quiz .cardFooter .ellipsis {
+.quiz .cardFooter .trash {
   color: rgb(202, 190, 190);
   cursor: pointer;
   position: relative;
 }
-.quiz .cardFooter .ellipsisActive {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  top: 30px;
-  left: 0;
-  background-color: #dddddd;
-  padding: 4px;
-  display: none;
-}
-.quiz .cardFooter .ellipsisActive::before{
-  content:"";
-  position: absolute;
-  border: 9px solid;
-  border-color: transparent transparent #dddddd transparent;
-  top: -18px;
-  left: 0px;
-}
-.quiz .cardFooter .ellipsisActive .delete {
+.quiz .cardFooter .trash:hover{
   color: red;
-  margin-right: 10px;
-}
-.quiz .cardFooter .ellipsisActive span {
-  font-size: 16px;
-  color: black;
-  font-weight: bold;
-  width: 100px;
 }
 .quiz .cardFooter .play {
   color: rgb(30, 182, 0);
@@ -268,4 +281,28 @@ form .answerInput .plusIcon{
   font-size: 30px;
   font-weight: bold;
   margin: auto;
+}
+
+/* Error Page  */
+.notFound .container{
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.notFound .container h1{
+  font-size: 50px;
+  color: #2c3558;
+}
+.notFound .container img{
+  max-width: 500px;
+  width: 100%;
+}
+.notFound .container a{
+  font-size: 30px;
+  text-decoration: underline;
+}
+.notFound .container a span{
+  margin-left: 13px;
 }
