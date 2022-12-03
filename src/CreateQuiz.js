@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Alert } from "@mui/material";
-import bg from "./bg.png";
 
 const CreateQuiz = () => {
   let [quizTitle, setQuizTitle] = useState("");
@@ -36,7 +35,7 @@ const CreateQuiz = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(quiz),
     });
-    if (response.status == 403) {
+    if (response.status === 403) {
       let error = await response.json();
       console.log(error.message);
     } else if (response.err) {
