@@ -19,16 +19,20 @@ a {
   padding-block: 1rem;
   margin: auto;
 }
-button{
-  background-color: var(--main-color);
-  color: white;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-}
 textarea{
   resize: none;
   padding: 8px;
+}
+.btn{
+  margin-right: 20px;
+  margin-bottom: 6px;
+  font-size: 15px;
+  padding: 10px;
+  background-color: var(--main-color);
+  color: white;
+  border-radius: 20px;
+  border: 0;
+  cursor: pointer;
 }
 
 /* Loading  */
@@ -79,8 +83,30 @@ label , .answerInput{
   margin-bottom: 10px;
 }
 form {
-  max-width: 700px;
   margin: 0 auto;
+}
+.alert{
+  margin-bottom: 30px;
+}
+form .content{
+  display: flex;
+  justify-content: space-between;
+}
+
+form .left{
+  width: clamp(450px, 60%,700px);
+  margin-right: 30px;
+}
+@media (max-width:1400px) {
+  form .container{
+    display: block;
+  }
+  form .right{
+    display: none;
+  }
+  form .left{
+    margin: 0 auto;
+  }
 }
 input,textarea{
   outline: none;
@@ -107,7 +133,7 @@ form .answersContainer{
 form .answersContainer .answerInput{
   width: fit-content;
   padding: 6px;
-  border-bottom: 3px solid rgb(0 100 114);
+  border-bottom: 3px solid var(--main-color);
 }
 form .answersContainer .answerInput input[type="text"]{
   padding: 8px;
@@ -125,17 +151,8 @@ form .formFields .box{
 form .formFields .box .btns{
   display: flex;
   flex-wrap: wrap;
-}
-form .formFields .box .btns button{
-  margin-left: 20px;
-  font-size: 15px;
-  padding: 10px;
-  margin-bottom: 6px;
-}
-form .formFields .box .btns .addNewQuestionBtn{
-  display: flex;
-}
-form .formFields .box .btns .addAnswer span{
+} 
+form .formFields .box .btns .addAnswer{
   margin-right: 7px;
 }
 /* End Form  */
@@ -173,10 +190,20 @@ form .formFields .box .btns .addAnswer span{
   padding: 20px;
   border-radius: 10px;
 }
+.quiz .cardImage{
+  position: relative;
+}
 .quiz .cardImage img {
   max-width: 100%;
   object-fit: cover;
   object-position: center;
+}
+.quiz .cardImage .lock{
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 25px;
+  color: rgb(19, 134, 163);
 }
 
 .quiz .cardBody {
@@ -209,6 +236,15 @@ form .formFields .box .btns .addAnswer span{
 .quiz .cardFooter .play {
   color: rgb(30, 182, 0);
   cursor: pointer;
+}
+.quiz .password {
+  margin-block: 10px 5px;
+}
+.quiz .password input{
+  width: 100%;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 0;
+  padding: 3px;
 }
 /* End Quizes */
 
