@@ -6,25 +6,36 @@ import noData from "./noData.svg";
 import { Alert } from "@mui/material";
 import { useState } from "react";
 
-const Quizes = ({ quizes }) => {
+const Quizes = ({ quizes ,setQuizes}) => {
   let [showAlert, setShowAlert] = useState(false);
+  let [isLoading,setIsLoading] = useState(false)
   let handleDelete = (id) => {
-    setShowAlert(true);
+    setIsLoading(true)
     fetch(process.env.REACT_APP_API_URL + "/quiz/" + id, {
       method: "DELETE",
     }).then(() => {
+      setQuizes(quizes.filter((quiz)=> quiz._id !== id))
       console.log("Quiz Deleted");
-      window.location.reload();
+      setIsLoading(false);
+      setShowAlert(true);
     });
   };
+  if(isLoading){
+    return <div className="loading"></div>
+  }
   if (quizes.length === 0) {
-    return (
+    return <>
+    {showAlert && (
+        <Alert severity="error" className="alert">
+          Quiz Deleted Successfuly
+        </Alert>
+      )}
       <div className="noQuizes">
         <img src={noData} alt="" />
         <h2>No Quizes To Show</h2>
         <Link to={"/createQuiz"}>Create Your Own Quiz</Link>
       </div>
-    );
+    </>
   }
   return (
     <>

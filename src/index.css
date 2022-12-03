@@ -1,12 +1,14 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI";
-  background-color: rgb(127, 180, 196);
+  background-color: white;
 }
 
 :root {
   --main-color: #2c3558;
+  --secondary-color:rgb(167 213 226);
 }
+
 ul {
   list-style-type: none;
 }
@@ -54,12 +56,16 @@ textarea{
 }
 
 /* Start Navbar  */
+.navbar{
+  position: sticky;
+  top: 0;
+}
 .navbar .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: -16px 7px 20px 11px #558fae;;
   margin-bottom: 60px;
+  background-color: var(--secondary-color);
 }
 .navbar .logo img {
   max-width: 50px;
@@ -70,7 +76,7 @@ textarea{
 .navbar .links a {
   font-size: 22px;
   cursor: pointer;
-  color: white;
+  color: rgb(44 54 89);;
   font-weight: bold;
 }
 .navbar .links li:not(:last-child) {
@@ -90,19 +96,23 @@ form {
 }
 form .content{
   display: flex;
-  justify-content: space-between;
+  gap: 25px;
 }
 
 form .left{
   width: clamp(450px, 60%,700px);
   margin-right: 30px;
+  position: sticky;
+  align-self: flex-start;
+  top:11rem;
+  left: 0;
+}
+form .right{
+  flex: 1;
 }
 @media (max-width:1400px) {
   form .container{
     display: block;
-  }
-  form .right{
-    display: none;
   }
   form .left{
     margin: 0 auto;
@@ -110,8 +120,8 @@ form .left{
 }
 input,textarea{
   outline: none;
-  border: none;
-  border-radius: 10px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 6px;
   font-size: 17px;
 }
 form label{
@@ -133,11 +143,12 @@ form .answersContainer{
 form .answersContainer .answerInput{
   width: fit-content;
   padding: 6px;
-  border-bottom: 3px solid var(--main-color);
+  border-bottom: 1px solid var(--secondary-color);
 }
 form .answersContainer .answerInput input[type="text"]{
   padding: 8px;
   background-color: transparent;
+  border: none;
 }
 form .answersContainer .answerInput input[type="text"]::placeholder{
   color: rgb(66, 66, 66);
@@ -189,6 +200,7 @@ form .formFields .box .btns .addAnswer{
   background-color: white;
   padding: 20px;
   border-radius: 10px;
+  box-shadow: 0px 0px 100px 17px #eeeeee;
 }
 .quiz .cardImage{
   position: relative;

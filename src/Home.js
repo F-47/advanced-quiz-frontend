@@ -2,7 +2,7 @@ import Quizes from "./Quizes";
 import useFetch from "./useFetch";
 
 const Home = () => {
-  let {data,isPending} = useFetch(process.env.REACT_APP_API_URL+"/quiz")
+  let {data,isPending,setData} = useFetch(process.env.REACT_APP_API_URL+"/quiz")
   
   if(isPending){
     return <div className="loading"></div>
@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="container">
-          <Quizes quizes={data}/>
+          <Quizes quizes={data} setQuizes={setData}/>
         </div>
     </div>
   );

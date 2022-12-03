@@ -20,8 +20,9 @@ const CreateQuiz = () => {
   ]);
   let [showAlert, setShowAlert] = useState(false);
   let navigate = useNavigate();
-  let handleSubmit = (e) => {
+  let handleSubmit = async (e) => {
     e.preventDefault();
+    
     let quiz = {
       quizTitle,
       quizDesc,
@@ -30,14 +31,19 @@ const CreateQuiz = () => {
     };
     console.log(quiz)
     setShowAlert(true);
-    fetch(process.env.REACT_APP_API_URL + "/quiz", {
+    let response = await fetch(process.env.REACT_APP_API_URL + "/quiz", {
       method: "Post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(quiz),
-    }).then(() => {
-      console.log("New Quiz Added");
-      navigate("/");
     });
+    if (response.status == 403) {
+      let error = await response.json();
+      console.log(error.message);
+    } else if (response.err) {
+      console.log("error");
+    } else {
+      navigate("/");
+    }
   };
   let handleInputChange = (e, index) => {
     let { name, value } = e.target;
@@ -133,6 +139,24 @@ const CreateQuiz = () => {
               ></textarea>
             </div>
             <div className="formFields">
+              <label htmlFor="quizPassword" className="form-label">
+                Quiz Password:
+              </label>
+              <input
+                type="password"
+                autoComplete="off"
+                placeholder="Enter your Password"
+                className="form-control"
+                id="quizPassword"
+                name="quizPassword"
+                value={quizPassword}
+                onChange={(e) => setQuizPassword(e.target.value)}
+              />
+            </div>
+            <button className="btn">Submit</button>
+          </div>
+          <div className="right">
+            <div className="formFields">
               {questions.map((question, i) => {
                 return (
                   <div className="box" key={i}>
@@ -208,25 +232,6 @@ const CreateQuiz = () => {
                 );
               })}
             </div>
-            <div className="formFields">
-              <label htmlFor="quizPassword" className="form-label">
-                Quiz Password:
-              </label>
-              <input
-                type="password"
-                autoComplete="off"
-                placeholder="Enter your Password"
-                className="form-control"
-                id="quizPassword"
-                name="quizPassword"
-                value={quizPassword}
-                onChange={(e) => setQuizPassword(e.target.value)}
-              />
-            </div>
-            <button className="btn">Submit</button>
-          </div>
-          <div className="right">
-            <img src={bg} alt="" />
           </div>
         </div>
       </div>
