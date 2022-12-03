@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Alert } from "@mui/material";
-import bcrypt from 'bcryptjs'
 import bg from "./bg.png";
 
 const CreateQuiz = () => {
@@ -23,9 +22,6 @@ const CreateQuiz = () => {
   let navigate = useNavigate();
   let handleSubmit = (e) => {
     e.preventDefault();
-    if(quizPassword !== ""){
-      quizPassword = bcrypt.hashSync(quizPassword,10) 
-    }
     let quiz = {
       quizTitle,
       quizDesc,
