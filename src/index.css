@@ -55,6 +55,22 @@ textarea{
   animation: spinner 0.6s linear infinite;
 }
 
+.alert{
+  width: 100%;
+  padding: 9px;
+  border-radius: 3px;
+}
+.danger{
+  background-color: #f8d7da;
+  color: rgb(103 15 15);
+  border: 2px solid rgb(207 168 166);
+}
+.success{
+  background-color: #d4edda;
+  color: rgb(4 125 9);
+  border: 2px solid rgb(169 213 171);
+}
+
 /* Start Navbar  */
 .navbar{
   position: sticky;
@@ -99,6 +115,24 @@ form .content{
   gap: 25px;
 }
 
+.required{
+  color: red;
+  position: relative;
+}
+.required::after{
+  content: "Required";
+  position: absolute;
+  font-size: 13px;
+  top: 4px;
+  left: 15px;
+  color: rgb(206, 17, 17);
+  opacity: 0;
+  transition: 0.2s;
+}
+.required:hover::after{
+  opacity: 100%;
+}
+
 form .left{
   width: clamp(450px, 60%,700px);
   margin-right: 30px;
@@ -106,6 +140,10 @@ form .left{
   align-self: flex-start;
   top:11rem;
   left: 0;
+}
+form .left .submit{
+  font-size: 18px;
+  padding: 10px 20px;
 }
 form .right{
   flex: 1;
@@ -156,6 +194,12 @@ form .answersContainer .answerInput input[type="text"]::placeholder{
 form .answersContainer .answerInput input[type="radio"]:checked{
   accent-color: #4e6cf0;
 }
+form .answersContainer .answerInput .btn{
+  font-size: 10px;
+  padding: 5px 10px;
+  background-color: rgb(167, 53, 53);
+  
+}
 form .formFields .box{
   margin-bottom: 20px;
 }
@@ -163,7 +207,7 @@ form .formFields .box .btns{
   display: flex;
   flex-wrap: wrap;
 } 
-form .formFields .box .btns .addAnswer{
+form .formFields .box .btns .addAnswer,.addQuestion,.removeQuestion{
   margin-right: 7px;
 }
 /* End Form  */
@@ -250,11 +294,10 @@ form .formFields .box .btns .addAnswer{
   cursor: pointer;
 }
 .quiz .password {
-  margin-block: 10px 5px;
+  margin-block: 20px 5px;
 }
 .quiz .password input{
   width: 100%;
-  border: 1px solid rgb(0, 0, 0);
   border-radius: 0;
   padding: 3px;
 }

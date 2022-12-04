@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { Alert } from "@mui/material";
+import { faPlus, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import Alert from "./Alert";
 
 const CreateQuiz = () => {
+  let [showAlert, setShowAlert] = useState(false);
+  let [alertText, setAlertText] = useState("");
   let [quizTitle, setQuizTitle] = useState("");
   let [quizDesc, setQuizDesc] = useState("");
   let [quizPassword, setQuizPassword] = useState("");
@@ -17,19 +19,15 @@ const CreateQuiz = () => {
       ],
     },
   ]);
-  let [showAlert, setShowAlert] = useState(false);
   let navigate = useNavigate();
   let handleSubmit = async (e) => {
     e.preventDefault();
-    
     let quiz = {
       quizTitle,
       quizDesc,
       quizPassword,
       questions,
     };
-    console.log(quiz)
-    setShowAlert(true);
     let response = await fetch(process.env.REACT_APP_API_URL + "/quiz", {
       method: "Post",
       headers: { "Content-Type": "application/json" },
@@ -37,9 +35,11 @@ const CreateQuiz = () => {
     });
     if (response.status === 403) {
       let error = await response.json();
-      console.log(error.message);
+      setAlertText(error.message);
+      setShowAlert(true);
     } else if (response.err) {
-      console.log("error");
+      setAlertText("Can't Create Quiz");
+      setShowAlert(true);
     } else {
       navigate("/");
     }
@@ -101,16 +101,12 @@ const CreateQuiz = () => {
   return (
     <form method="post" onSubmit={handleSubmit}>
       <div className="container">
-        {showAlert && (
-          <Alert severity="success" className="alert">
-            Quiz Created Successfuly
-          </Alert>
-        )}
+        {showAlert && <Alert alertText={alertText} alertType={"danger"} />}
         <div className="content">
           <div className="left">
             <div className="formFields">
               <label htmlFor="quizTitle" className="form-label">
-                Quiz Name:
+                Quiz Name: <span className="required">*</span>
               </label>
               <input
                 type="text"
@@ -126,7 +122,7 @@ const CreateQuiz = () => {
             </div>
             <div className="formFields">
               <label htmlFor="quizDesc" className="form-label">
-                Quiz Description:
+                Quiz Description: <span className="required">*</span>
               </label>
               <textarea
                 id="quizDesc"
@@ -152,7 +148,7 @@ const CreateQuiz = () => {
                 onChange={(e) => setQuizPassword(e.target.value)}
               />
             </div>
-            <button className="btn">Submit</button>
+            <button className="btn submit">Submit</button>
           </div>
           <div className="right">
             <div className="formFields">
@@ -161,7 +157,7 @@ const CreateQuiz = () => {
                   <div className="box" key={i}>
                     <div className="question">
                       <label htmlFor="question" className="form-label">
-                        Question{i + 1}:
+                        Question{i + 1}: <span className="required">*</span>
                       </label>
                       <input
                         name="question"
@@ -206,6 +202,12 @@ const CreateQuiz = () => {
                       })}
                     </div>
                     <div className="btns">
+                      {questions.length - 1 === i && (
+                        <button onClick={handleAddClick} className="btn">
+                          <span className="addQuestion">Add New Question</span>
+                          <FontAwesomeIcon icon={faPlus} className="plusIcon" />
+                        </button>
+                      )}
                       <button
                         className="btn"
                         onClick={(e) => handleAddAnswer(e, i)}
@@ -213,17 +215,19 @@ const CreateQuiz = () => {
                         <span className="addAnswer">Add New Answer</span>
                         <FontAwesomeIcon icon={faPlus} className="plusIcon" />
                       </button>
+
                       {questions.length !== 1 && (
                         <button
                           className="btn"
                           onClick={() => handleDeleteQuestion(i)}
                         >
-                          Remove
-                        </button>
-                      )}
-                      {questions.length - 1 === i && (
-                        <button onClick={handleAddClick} className="btn">
-                          Add New Question
+                          <span className="removeQuestion">
+                            Remove Question
+                          </span>
+                          <FontAwesomeIcon
+                            icon={faCircleXmark}
+                            className="plusIcon"
+                          />
                         </button>
                       )}
                     </div>
