@@ -26,6 +26,7 @@ let Quizes = ({ quizes, setQuizes }) => {
   if (quizes.length === 0) {
     return (
       <>
+      {showAlert && <Alert alertText={"Quiz Deleted Successfully"} alertType={"success"} />}
         <div className="noQuizes">
           <img src={noData} alt="" />
           <h2>No Quizes To Show</h2>

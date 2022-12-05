@@ -6,6 +6,7 @@ body {
 
 :root {
   --main-color: #2c3558;
+  --btn-hover-color: #3f4977;
   --secondary-color:rgb(167 213 226);
 }
 
@@ -35,6 +36,10 @@ textarea{
   border-radius: 20px;
   border: 0;
   cursor: pointer;
+}
+
+.btn:hover{
+  background-color: var(--btn-hover-color);
 }
 
 /* Loading  */
@@ -75,6 +80,7 @@ textarea{
 .navbar{
   position: sticky;
   top: 0;
+  z-index: 2;
 }
 .navbar .container {
   display: flex;
@@ -90,7 +96,7 @@ textarea{
   display: flex;
 }
 .navbar .links a {
-  font-size: 22px;
+  font-size: 26px;
   cursor: pointer;
   color: rgb(44 54 89);;
   font-weight: bold;
@@ -118,6 +124,7 @@ form .content{
 .required{
   color: red;
   position: relative;
+  
 }
 .required::after{
   content: "Required";
@@ -125,9 +132,10 @@ form .content{
   font-size: 13px;
   top: 4px;
   left: 15px;
-  color: rgb(206, 17, 17);
+  color: red;
   opacity: 0;
   transition: 0.2s;
+  z-index: 0;
 }
 .required:hover::after{
   opacity: 100%;
@@ -152,10 +160,11 @@ form .right{
   form .container{
     display: block;
   }
-  form .left{
+  form .left,form .right{
     margin: 0 auto;
   }
 }
+
 input,textarea{
   outline: none;
   border: 1px solid var(--secondary-color);
@@ -313,10 +322,7 @@ form .formFields .box .btns .addAnswer,.addQuestion,.removeQuestion{
 }
 
 .questions .container{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 550px;
+  width: 1250px;
   background-color: var(--main-color);
   color: white;
   padding: 30px;
@@ -326,34 +332,36 @@ form .formFields .box .btns .addAnswer,.addQuestion,.removeQuestion{
 
 .questions .container .question-box{
   margin-right: 20px;
+  padding: 30px;
 }
 
 .questions .container .question-box .question-no{
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
 .questions .container .question-box .question-no span{
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .questions .container .question-box .thequestion{
-  font-size: 22px;
+  font-size: 45px;
+  text-transform: capitalize;
 }
 
 .questions .container .answers{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat( 12, minmax(300px, 1fr) );
+  margin-top: 40px;
 }
 
 .questions .container .answers button{
-  background-color: transparent;
+  background-color: var(--main-color);
   color: white;
   border-radius: 10px;
-  border-color: white;
+  border-color: #a7d5e2;;
   margin-bottom: 20px;
   text-align: left;
   padding: 5px 10px;
@@ -364,14 +372,14 @@ form .formFields .box .btns .addAnswer,.addQuestion,.removeQuestion{
 }
 
 .questions .container .answers button:hover {
-  background-color: #d1d1d1;
-  color: black;
+  background-color: var(--btn-hover-color);
+  color: rgb(252, 252, 252);
 }
 
 .score{
   font-size: 30px;
   font-weight: bold;
-  margin: auto;
+  text-align: center;
 }
 
 /* Error Page  */

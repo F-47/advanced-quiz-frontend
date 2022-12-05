@@ -168,7 +168,7 @@ const CreateQuiz = () => {
                       />
                     </div>
                     <div className="answersContainer">
-                      <h2>Answers:</h2>
+                      <h2>Answers: <span className="required">*</span></h2>
                       {question.answerOptions.map((answer, j) => {
                         return (
                           <div className="answerInput" key={j}>
