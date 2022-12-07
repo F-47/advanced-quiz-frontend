@@ -10,6 +10,7 @@ const CreateQuiz = () => {
   let [quizTitle, setQuizTitle] = useState("");
   let [quizDesc, setQuizDesc] = useState("");
   let [quizPassword, setQuizPassword] = useState("");
+  let [quizTime ,setQuizTime] = useState("");
   let [questions, setQuestions] = useState([
     {
       question: "",
@@ -18,7 +19,7 @@ const CreateQuiz = () => {
         { answerText: "", isCorrect: false },
       ],
     },
-  ]);
+]);
   let navigate = useNavigate();
   let handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ const CreateQuiz = () => {
       quizDesc,
       quizPassword,
       questions,
+      quizTime
     };
     let response = await fetch(process.env.REACT_APP_API_URL + "/quiz", {
       method: "Post",
@@ -40,8 +42,8 @@ const CreateQuiz = () => {
     } else if (response.err) {
       setAlertText("Can't Create Quiz");
       setShowAlert(true);
-    } else {
-      navigate("/");
+    } else{
+      navigate('/')
     }
   };
   let handleInputChange = (e, index) => {
@@ -146,6 +148,21 @@ const CreateQuiz = () => {
                 name="quizPassword"
                 value={quizPassword}
                 onChange={(e) => setQuizPassword(e.target.value)}
+              />
+            </div>
+            <div className="formFields">
+              <label htmlFor="quizTime" className="form-label">
+                Quiz Time: (In Minutes)
+              </label>
+              <input
+                type="number"
+                autoComplete="off"
+                placeholder="Enter the quiz time"
+                className="form-control"
+                id="quizTime"
+                name="quizTime"
+                value={quizTime}
+                onChange={(e) => setQuizTime(e.target.value)}
               />
             </div>
             <button className="btn submit">Submit</button>

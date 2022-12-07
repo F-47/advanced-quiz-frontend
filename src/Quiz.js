@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useFetch from "./useFetch";
+import Timer from "./Timer";
+
 
 const Quiz = () => {
   let [currentQuestion, setCurrentQuestion] = useState(0);
@@ -10,7 +12,6 @@ const Quiz = () => {
   let { isPending, data } = useFetch(
     process.env.REACT_APP_API_URL + "/quiz/" + id
   );
-  let navigate = useNavigate();
 
   if (isPending) {
     return <div className="loading"></div>;
@@ -30,11 +31,6 @@ const Quiz = () => {
         setShowScore(true);
       }
     };
-    if (showScore) {
-      setTimeout(() => {
-        navigate("/");
-      }, 5000);
-    }
     return (
       <div className="questions">
         <div className="container">
@@ -45,9 +41,11 @@ const Quiz = () => {
           ) : (
             <>
               <div className="question-box">
-                <div className="question-no">
-                  Question {currentQuestion + 1}
-                  <span>/{length}</span>
+                <div className="question-header">
+                  <h2>Question {currentQuestion + 1}/{length}</h2>
+                  <div className="timer">
+                  <Timer time={data.quizTime}/>
+                  </div>
                 </div>
                 <div className="thequestion">
                   {data.questions[currentQuestion].question} ?

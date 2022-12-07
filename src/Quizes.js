@@ -2,13 +2,15 @@ import cardBg from "./cardBg.svg";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faTrash, faLock } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import noData from "./noData.svg";
 import Alert from "./Alert";
 
 let Quizes = ({ quizes, setQuizes }) => {
   let [isLoading, setIsLoading] = useState(false);
   let [showAlert, setShowAlert] = useState(false);
+  let [pass,setPass] = useState("")
+  let navigate = useNavigate();
   let handleDelete = (id) => {
     setIsLoading(true);
     fetch(process.env.REACT_APP_API_URL + "/quiz/" + id, {
@@ -35,17 +37,23 @@ let Quizes = ({ quizes, setQuizes }) => {
       </>
     );
   }
+  let startQuizHandler = (quizPassword,id) =>{
+    if(pass === quizPassword){
+      navigate("/quiz/"+id);
+    }
+  }
   return (
     <>
       {showAlert && <Alert alertText={"Quiz Deleted Successfully"} alertType={"success"} />}
       <div className="quizes">
         {quizes.map((item) => {
-          let { quizTitle, quizDesc, _id, quizPassword } = item;
+          let { quizTitle, quizDesc, _id, quizPassword,quizTime } = item;
           return (
             <div className="quiz" style={{ maxWidth: "370px" }} key={_id}>
               <div className="cardImage">
                 <img src={cardBg} alt="cardBackground" />
                 {quizPassword && <FontAwesomeIcon icon={faLock} className="lock" />}
+                {quizTime && <div className="time">{quizTime} {quizTime > 1 ? 'Minutes':'Minute '}</div>}
               </div>
               <div className="lock"></div>
               <div className="cardBody">
@@ -56,13 +64,10 @@ let Quizes = ({ quizes, setQuizes }) => {
                 <div className="delete" onClick={() => handleDelete(_id)}>
                   <FontAwesomeIcon icon={faTrash} className="trash" />
                 </div>
-                <Link to={`/quiz/${_id}`}>
+                <Link to={'/quiz/'+_id}>
                   <FontAwesomeIcon icon={faPlay} className="play" />
                 </Link>
               </div>
-              {/* {quizPassword && <div className="password">
-                <input type="password" placeholder="Enter Password"/>
-              </div>} */}
             </div>
           );
         })}
