@@ -2,15 +2,15 @@ import cardBg from "./cardBg.svg";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faTrash, faLock } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import noData from "./noData.svg";
 import Alert from "./Alert";
 
 let Quizes = ({ quizes, setQuizes }) => {
   let [isLoading, setIsLoading] = useState(false);
   let [showAlert, setShowAlert] = useState(false);
-  let [pass,setPass] = useState("")
-  let navigate = useNavigate();
+  // let [pass,setPass] = useState("")
+  // let navigate = useNavigate();
   let handleDelete = (id) => {
     setIsLoading(true);
     fetch(process.env.REACT_APP_API_URL + "/quiz/" + id, {
@@ -37,11 +37,11 @@ let Quizes = ({ quizes, setQuizes }) => {
       </>
     );
   }
-  let startQuizHandler = (quizPassword,id) =>{
-    if(pass === quizPassword){
-      navigate("/quiz/"+id);
-    }
-  }
+  // let startQuizHandler = (quizPassword,id) =>{
+  //   if(pass === quizPassword){
+  //     navigate("/quiz/"+id);
+  //   }
+  // }
   return (
     <>
       {showAlert && <Alert alertText={"Quiz Deleted Successfully"} alertType={"success"} />}
