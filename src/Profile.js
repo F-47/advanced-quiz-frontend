@@ -17,7 +17,8 @@ const Profile = () => {
         setUserData(data);
         setIsLoading(false);
       });
-  }, []);
+      setIsLoading(false);
+  });
   if (isLoading) {
     return <div className="loading"></div>;
   }
