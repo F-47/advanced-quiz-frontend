@@ -2,14 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import loginImg from "./login.svg";
 import Alert from "./Alert";
-
+import { useGlobalContext } from "./context";
 
 const Login = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [showAlert, setShowAlert] = useState(false);
-  let [alertText, setAlertText] = useState([]);
-  let [alertType, setAlertType] = useState("");
+  let {showAlert,setShowAlert,alertText,setAlertText,alertType,setAlertType} = useGlobalContext()
 
   let user = { email, password };
   let handleSubmit = (e) => {

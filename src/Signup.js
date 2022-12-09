@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import signUpImg from "./signUpImg.svg";
 import Alert from "./Alert";
+import { useGlobalContext } from "./context";
 
 const Signup = () => {
   let [firstname, setfirstname] = useState("");
@@ -10,9 +11,7 @@ const Signup = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [password2, setpassword2] = useState("");
-  let [showAlert, setShowAlert] = useState(false);
-  let [alertText, setAlertText] = useState([]);
-  let [alertType, setAlertType] = useState("");
+  let {showAlert,setShowAlert,alertText,setAlertText,alertType,setAlertType} = useGlobalContext()
   let user = {
     firstname,
     lastname,

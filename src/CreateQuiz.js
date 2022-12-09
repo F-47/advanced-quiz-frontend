@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import Alert from "./Alert";
+import { useGlobalContext } from "./context";
 
 const CreateQuiz = () => {
-  let [showAlert, setShowAlert] = useState(false);
-  let [alertText, setAlertText] = useState("");
+  let {showAlert,setShowAlert,alertText,setAlertText} = useGlobalContext()
   let [quizTitle, setQuizTitle] = useState("");
   let [quizDesc, setQuizDesc] = useState("");
   let [quizPassword, setQuizPassword] = useState("");

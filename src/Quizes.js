@@ -1,14 +1,13 @@
 import cardBg from "./cardBg.svg";
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faTrash, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import noData from "./noData.svg";
 import Alert from "./Alert";
+import { useGlobalContext } from "./context";
 
 let Quizes = ({ quizes, setQuizes }) => {
-  let [isLoading, setIsLoading] = useState(false);
-  let [showAlert, setShowAlert] = useState(false);
+  let {showAlert,setShowAlert,isLoading,setIsLoading} = useGlobalContext()
   let token = window.localStorage.getItem("token")
   let handleDelete = (id) => {
     setIsLoading(true);
