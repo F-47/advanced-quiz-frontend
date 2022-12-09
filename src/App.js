@@ -7,6 +7,7 @@ import Quiz from "./Quiz";
 import NotFound from "./NotFound";
 import Login from "./Login";
 import Signup from "./Signup";
+import Profile from "./Profile";
 
 function App() {
   return <Router>
@@ -15,8 +16,9 @@ function App() {
       <Route exact path="/" element={<Home/>}></Route>
       <Route exact path="/quiz/:id" element={<Quiz/>}></Route>
       <Route exact path="/createQuiz" element={<CreateQuiz/>}></Route>
-      <Route exact path="/login" element={<Login/>}></Route>
       <Route exact path="/signup" element={<Signup/>}></Route>
+      <Route exact path="/login" element={<Login/>}></Route>
+      <Route exact path="/profile" element={<Profile/>}></Route>
       <Route path="*" element={<NotFound/>}></Route>
     </Routes>
   </Router>

@@ -477,3 +477,38 @@ form .formFields .box .question input {
   }
 }
 /* End Login  */
+
+/* Start Profile */
+.profile{
+  background-color: rgb(241, 241, 241);
+  height: calc(100vh - 99px);
+}
+.profile .generalInfo,.profile .security{
+  background-color: white;
+  padding: 25px;
+}
+.profile .title{
+  font-size: 25px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.profile .fields{
+  display: flex;
+}
+.profile .formFields{
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+}
+.profile .formFields label{
+  font-size: 16px;
+  font-weight: bold;
+}
+.profile .formFields input{
+  border: 1px solid black;
+  padding-inline: 10px;
+  color: rgb(122, 122, 122);
+  cursor: no-drop;
+  width: fit-content;
+}
+/* End Profile */

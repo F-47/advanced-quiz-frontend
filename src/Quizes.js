@@ -9,6 +9,7 @@ import Alert from "./Alert";
 let Quizes = ({ quizes, setQuizes }) => {
   let [isLoading, setIsLoading] = useState(false);
   let [showAlert, setShowAlert] = useState(false);
+  let token = window.localStorage.getItem("token")
   let handleDelete = (id) => {
     setIsLoading(true);
     fetch(process.env.REACT_APP_API_URL + "/quiz/" + id, {
@@ -57,9 +58,9 @@ let Quizes = ({ quizes, setQuizes }) => {
                 <div className="quizDesc">{quizDesc}</div>
               </div>
               <div className="cardFooter">
-                <div className="delete" onClick={() => handleDelete(_id)}>
+                {token && <div className="delete" onClick={() => handleDelete(_id)}>
                   <FontAwesomeIcon icon={faTrash} className="trash" />
-                </div>
+                </div>}
                 <Link to={'/quiz/'+_id}>
                   <FontAwesomeIcon icon={faPlay} className="play" />
                 </Link>

@@ -1,21 +1,53 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import loginImg from "./login.svg";
+import Alert from "./Alert";
+
 
 const Login = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  return <div className="login">
+  let [showAlert, setShowAlert] = useState(false);
+  let [alertText, setAlertText] = useState([]);
+  let [alertType, setAlertType] = useState("");
+
+  let user = { email, password };
+  let handleSubmit = (e) => {
+    e.preventDefault();
+   fetch(process.env.REACT_APP_API_URL + "/login", {
+      method: "Post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    }).then((res)=>res.json())
+    .then((data)=>{
+      if(data.status==="ok")
+      {
+        window.localStorage.setItem('token',data.data)
+        setAlertType("success")
+        setAlertText([{msg:"LoggedIn"}]);
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          window.location.href = "/"
+        }, 2000);
+      }
+      console.log(data)
+    })
+  };
+
+  return (
+    <div className="login">
       <div className="container">
         <div className="left">
           <img src={loginImg} alt="" />
         </div>
         <div className="right">
-          <form action="">
+          <form action="" onSubmit={handleSubmit}>
             <h1>Hello! Welcome back.</h1>
             <p>
               Login With your data that you entered during Your registeration.
             </p>
+        {showAlert && <Alert alertText={alertText} alertType={alertType} />}
             <div className="formFields">
               <label htmlFor="email" className="form-label">
                 Email:
@@ -48,12 +80,16 @@ const Login = () => {
             </div>
             <button className="btn submitBtn">Login</button>
             <div>
-              Don't have an account? <Link to={"/signup"} className="signUpBtn">SignUp</Link>
+              Don't have an account?{" "}
+              <Link to={"/signup"} className="signUpBtn">
+                SignUp
+              </Link>
             </div>
           </form>
         </div>
       </div>
     </div>
+  );
 };
 
 export default Login;
