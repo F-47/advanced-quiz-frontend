@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from "react";
 import { useGlobalContext } from "./context";
 
 const Profile = () => {
   let [userData, setUserData] = useState("");
   let {isLoading,setIsLoading} = useGlobalContext()
-  useEffect(() => {
-    setIsLoading(true);
     fetch(process.env.REACT_APP_API_URL + "/profile", {
       method: "Post",
       headers: { "Content-Type": "application/json" },
@@ -17,8 +15,6 @@ const Profile = () => {
         setUserData(data);
         setIsLoading(false);
       });
-      setIsLoading(false);
-  });
   if (isLoading) {
     return <div className="loading"></div>;
   }

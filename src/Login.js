@@ -7,30 +7,40 @@ import { useGlobalContext } from "./context";
 const Login = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let {showAlert,setShowAlert,alertText,setAlertText,alertType,setAlertType} = useGlobalContext()
+  let {
+    showAlert,
+    setShowAlert,
+    alertText,
+    setAlertText,
+    alertType,
+    setAlertType,
+  } = useGlobalContext();
 
   let user = { email, password };
   let handleSubmit = (e) => {
     e.preventDefault();
-   fetch(process.env.REACT_APP_API_URL + "/login", {
+    fetch(process.env.REACT_APP_API_URL + "/login", {
       method: "Post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
-    }).then((res)=>res.json())
-    .then((data)=>{
-      if(data.status==="ok")
-      {
-        window.localStorage.setItem('token',data.data)
-        setAlertType("success")
-        setAlertText([{msg:"LoggedIn"}]);
-        setShowAlert(true);
-        setTimeout(() => {
-          setShowAlert(false);
-          window.location.href = "/"
-        }, 2000);
-      }
-      console.log(data)
     })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "ok") {
+          window.localStorage.setItem("token", data.data);
+          setAlertType("success");
+          setAlertText([{ msg: "LoggedIn" }]);
+          setShowAlert(true);
+          setTimeout(() => {
+            setShowAlert(false);
+            window.location.href = "/";
+          }, 1000);
+        } else {
+          setAlertType("danger");
+          setAlertText([{ msg: data.msg }]);
+          setShowAlert(true);
+        }
+      });
   };
 
   return (
@@ -45,7 +55,7 @@ const Login = () => {
             <p>
               Login With your data that you entered during Your registeration.
             </p>
-        {showAlert && <Alert alertText={alertText} alertType={alertType} />}
+            {showAlert && <Alert alertText={alertText} alertType={alertType} />}
             <div className="formFields">
               <label htmlFor="email" className="form-label">
                 Email:
