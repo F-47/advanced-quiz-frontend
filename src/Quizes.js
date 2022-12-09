@@ -9,8 +9,6 @@ import Alert from "./Alert";
 let Quizes = ({ quizes, setQuizes }) => {
   let [isLoading, setIsLoading] = useState(false);
   let [showAlert, setShowAlert] = useState(false);
-  // let [pass,setPass] = useState("")
-  // let navigate = useNavigate();
   let handleDelete = (id) => {
     setIsLoading(true);
     fetch(process.env.REACT_APP_API_URL + "/quiz/" + id, {
@@ -20,6 +18,9 @@ let Quizes = ({ quizes, setQuizes }) => {
       console.log("Quiz Deleted");
       setIsLoading(false);
       setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
     });
   };
   if (isLoading) {
@@ -28,7 +29,7 @@ let Quizes = ({ quizes, setQuizes }) => {
   if (quizes.length === 0) {
     return (
       <>
-      {showAlert && <Alert alertText={"Quiz Deleted Successfully"} alertType={"success"} />}
+      {showAlert && <Alert alertText={[{msg:"Quiz Deleted Successfully"}]} alertType={"success"} />}
         <div className="noQuizes">
           <img src={noData} alt="" />
           <h2>No Quizes To Show</h2>
@@ -37,14 +38,9 @@ let Quizes = ({ quizes, setQuizes }) => {
       </>
     );
   }
-  // let startQuizHandler = (quizPassword,id) =>{
-  //   if(pass === quizPassword){
-  //     navigate("/quiz/"+id);
-  //   }
-  // }
   return (
     <>
-      {showAlert && <Alert alertText={"Quiz Deleted Successfully"} alertType={"success"} />}
+      {showAlert && <Alert alertText={[{msg:"Quiz Deleted Successfully"}]} alertType={"success"} />}
       <div className="quizes">
         {quizes.map((item) => {
           let { quizTitle, quizDesc, _id, quizPassword,quizTime } = item;

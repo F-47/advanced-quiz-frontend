@@ -6,7 +6,7 @@ body {
 
 :root {
   --main-color: #2c3558;
-  --btn-hover-color: #3f4977;
+  --main-color2: #3f4977;
   --secondary-color: rgb(167 213 226);
 }
 
@@ -44,7 +44,7 @@ textarea {
 }
 
 .btn:hover {
-  background-color: var(--btn-hover-color);
+  background-color: var(--main-color2);
 }
 
 /* Loading  */
@@ -69,6 +69,7 @@ textarea {
   width: 100%;
   padding: 9px;
   border-radius: 3px;
+  margin-bottom: 10px;
 }
 .danger {
   background-color: #f8d7da;
@@ -101,7 +102,6 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 60px;
   background-color: var(--secondary-color);
 }
 .navbar .logo img {
@@ -126,13 +126,10 @@ label,
 .answerInput {
   margin-bottom: 10px;
 }
-form {
-  margin: 0 auto;
+.createQuizForm {
+  margin: 65px auto;
 }
-.alert {
-  margin-bottom: 30px;
-}
-form .content {
+.createQuizForm .content {
   display: flex;
   gap: 25px;
 }
@@ -156,7 +153,7 @@ form .content {
   opacity: 100%;
 }
 
-form .left {
+.createQuizForm .left {
   width: clamp(450px, 60%, 700px);
   margin-right: 30px;
   position: sticky;
@@ -164,19 +161,19 @@ form .left {
   top: 11rem;
   left: 0;
 }
-form .left .submit {
+.createQuizForm .left .submit {
   font-size: 18px;
   padding: 10px 20px;
 }
-form .right {
+.createQuizForm .right {
   flex: 1;
 }
 @media (max-width: 1400px) {
-  form .container {
+  .createQuizForm .container {
     display: block;
   }
-  form .left,
-  form .right {
+  .createQuizForm .left,
+  .createQuizForm .right {
     margin: 0 auto;
   }
 }
@@ -202,38 +199,38 @@ form .formFields input,
 form .formFields .box .question input {
   padding: 15px;
 }
-form .answersContainer {
+.createQuizForm .answersContainer {
   margin-bottom: 30px;
 }
-form .answersContainer .answerInput {
+.createQuizForm .answersContainer .answerInput {
   width: fit-content;
   padding: 6px;
   border-bottom: 1px solid var(--secondary-color);
 }
-form .answersContainer .answerInput input[type="text"] {
+.createQuizForm .answersContainer .answerInput input[type="text"] {
   padding: 8px;
   background-color: transparent;
   border: none;
 }
-form .answersContainer .answerInput input[type="text"]::placeholder {
+.createQuizForm .answersContainer .answerInput input[type="text"]::placeholder {
   color: rgb(66, 66, 66);
 }
-form .answersContainer .answerInput input[type="radio"]:checked {
+.createQuizForm .answersContainer .answerInput input[type="radio"]:checked {
   accent-color: #4e6cf0;
 }
-form .answersContainer .answerInput .btn {
+.createQuizForm .answersContainer .answerInput .btn {
   font-size: 10px;
   padding: 5px 10px;
   background-color: rgb(167, 53, 53);
 }
-form .formFields .box {
+.createQuizForm .formFields .box {
   margin-bottom: 20px;
 }
-form .formFields .box .btns {
+.createQuizForm .formFields .box .btns {
   display: flex;
   flex-wrap: wrap;
 }
-form .formFields .box .btns .addAnswer,
+.createQuizForm .formFields .box .btns .addAnswer,
 .addQuestion,
 .removeQuestion {
   margin-right: 7px;
@@ -395,7 +392,7 @@ form .formFields .box .btns .addAnswer,
 }
 
 .questions .container .answers button:hover {
-  background-color: var(--btn-hover-color);
+  background-color: var(--main-color2);
   color: rgb(252, 252, 252);
 }
 
@@ -431,25 +428,51 @@ form .formFields .box .btns .addAnswer,
 
 /* Start Login  */
 .login .container{
+  height: 70vh;
+}
+.login .container,.signup .container{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
-.login .container .left img{
-  max-width: 70%;
-  width: 100%;
+.login .container .left,.signup .container .right{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.login .container .left img,.signup .container .right img{
+  max-width: 80%;
   object-fit: cover;
   object-position: center;
 }
-.login .container .right form p{
+.login .container .right h1,.signup .container .left h1{
+  text-align: center;
+}
+.login .container .right form p,.signup .container .left form p{
   font-size: 19px;
+}
+.login .container .right form input,.signup .container .left form input{
+  margin-bottom: 5px;
+}
+.login .container .right form input:focus,.signup .container .left form input:focus{
+  border: 2px solid var(--main-color2);
+  box-shadow:-1px 0px 18px 1px var(--main-color2);
+  transition: 0.2s;
+}
+.login .container .right form .signUpBtn,.signup .container .left form .signInBtn{
+  color: var(--main-color2);
+  font-weight: bold;
+  font-size: 18px;
+}
+.login .container .right form .signUpBtn:hover,.signup .container .left form .signInBtn:hover{
+  text-decoration: underline;
 }
 
 @media (max-width:1120px) {
-  .login .container{
+  .login .container,.signup .container{
     justify-content: center;
   }
-  .login .container .left img{
+  .login .container .left img,.signup .container .right img{
     display: none;
   }
 }

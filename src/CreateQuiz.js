@@ -37,10 +37,10 @@ const CreateQuiz = () => {
     });
     if (response.status === 403) {
       let error = await response.json();
-      setAlertText(error.message);
+      setAlertText([{msg:error.message}]);
       setShowAlert(true);
     } else if (response.err) {
-      setAlertText("Can't Create Quiz");
+      setAlertText([{msg:"Can't Create Quiz"}]);
       setShowAlert(true);
     } else{
       navigate('/')
@@ -101,7 +101,7 @@ const CreateQuiz = () => {
   };
 
   return (
-    <form method="post" onSubmit={handleSubmit}>
+    <form method="post" onSubmit={handleSubmit} className='createQuizForm'>
       <div className="container">
         {showAlert && <Alert alertText={alertText} alertType={"danger"} />}
         <div className="content">
