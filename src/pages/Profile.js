@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../context";
 
 const Profile = () => {
   let [userData, setUserData] = useState("");

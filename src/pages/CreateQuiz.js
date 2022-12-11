@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import Alert from "./Alert";
-import { useGlobalContext } from "./context";
+import Alert from "../Alert";
+import { useGlobalContext } from "../context";
 
 const CreateQuiz = () => {
   let {showAlert,setShowAlert,alertText,setAlertText} = useGlobalContext()

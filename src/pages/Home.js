@@ -1,5 +1,5 @@
-import Quizes from "./Quizes";
-import useFetch from "./useFetch";
+import Quizes from "../Quizes";
+import useFetch from "../useFetch";
 
 const Home = () => {
   let {data,isPending,setData} = useFetch(process.env.REACT_APP_API_URL+"/quiz")

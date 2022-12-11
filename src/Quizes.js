@@ -1,8 +1,8 @@
-import cardBg from "./cardBg.svg";
+import cardBg from "./imgs/cardBg.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faTrash, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import noData from "./noData.svg";
+import noData from "./imgs/noData.svg";
 import Alert from "./Alert";
 import { useGlobalContext } from "./context";
 

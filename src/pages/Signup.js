@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import signUpImg from "./signUpImg.svg";
-import Alert from "./Alert";
-import { useGlobalContext } from "./context";
+import signUpImg from "../imgs/signUpImg.svg";
+import Alert from "../Alert";
+import { useGlobalContext } from "../context";
 
 const Signup = () => {
   let [firstname, setfirstname] = useState("");

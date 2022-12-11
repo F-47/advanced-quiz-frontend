@@ -58,7 +58,7 @@ const Quiz = () => {
                           key={index}
                           onClick={() => handleButtonClick(item.isCorrect)}
                         >
-                          {index}. {item.answerText}
+                          {index+1}. {item.answerText}
                         </button>
                       );
                     }

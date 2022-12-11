@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "./logo.png";
+import logo from "./imgs/logo.png";
 
 const Navbar = () => {
   let token = window.localStorage.getItem("token");
@@ -15,16 +15,16 @@ const Navbar = () => {
         </div>
         <ul className="links">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={() => setShowBtn(false)}>Home</Link>
           </li>
           {token && (
             <li>
-              <Link to="/createQuiz">Create Quiz</Link>
+              <Link to="/createQuiz" onClick={() => setShowBtn(false)}>Create Quiz</Link>
             </li>
           )}
           {!token && (
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login" onClick={() => setShowBtn(false)}>Login</Link>
             </li>
           )}
           {token && (
@@ -32,10 +32,11 @@ const Navbar = () => {
               <Link onClick={() => setShowBtn(!showBtn)}>Account</Link>
               {showBtn && (
                 <div className="dropMenu">
-                  <Link to="/profile">Profile</Link>
+                  <Link to="/profile" onClick={() => setShowBtn(false)}>Profile</Link>
                   <Link
                     className="signOutBtn"
                     onClick={() => {
+                      setShowBtn(false)
                       window.localStorage.removeItem("token");
                       window.location.href = "/";
                     }}
