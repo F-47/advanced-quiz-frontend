@@ -32,7 +32,7 @@ const Navbar = () => {
               <Link onClick={() => setShowBtn(!showBtn)}>Account</Link>
               {showBtn && (
                 <div className="dropMenu">
-                  <Link to="/profile" onClick={() => setShowBtn(false)}>Profile</Link>
+                  <Link to={"/profile/"+token}onClick={() => setShowBtn(false)}>Profile</Link>
                   <Link
                     className="signOutBtn"
                     onClick={() => {

@@ -1,25 +1,14 @@
-import { useState } from "react";
 import React from "react";
-import { useGlobalContext } from "../context";
+import useFetch from "../useFetch";
 
 const Profile = () => {
-  let [userData, setUserData] = useState("");
-  let {isLoading,setIsLoading} = useGlobalContext()
-    fetch(process.env.REACT_APP_API_URL + "/profile", {
-      method: "Post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: window.localStorage.getItem("token") }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setUserData(data);
-        setIsLoading(false);
-      });
-  if (isLoading) {
+  let token = window.localStorage.getItem("token")
+  let {isPending, data } = useFetch(process.env.REACT_APP_API_URL + "/profile/"+token);
+  if (isPending) {
     return <div className="loading"></div>;
   }
-  if (userData) {
-    let { firstname, lastname, email } = userData.data;
+  if (data.data) {
+    let { firstname, lastname, email } = data.data;
     return (
       <div className="profile">
         <div className="container">
