@@ -9,22 +9,25 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import { AppProvider } from "./context";
 
 function App() {
   return (
     <Router>
-      <Navbar></Navbar>
-      <Routes>
-      <Route exact path="/" element={<Home />}></Route>
-        <Route element={<PrivateRoutes />}>
-          <Route exact path="/createQuiz" element={<CreateQuiz />}></Route>
-          <Route exact path="/profile" element={<Profile />}></Route>
-          <Route exact path="/quiz/:id" element={<Quiz />}></Route>
-        </Route>
-        <Route exact path="/signup" element={<Signup />}></Route>
-        <Route exact path="/login" element={<Login />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
+      <AppProvider>
+        <Navbar></Navbar>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route element={<PrivateRoutes />}>
+            <Route exact path="/createQuiz" element={<CreateQuiz />} />
+            <Route exact path="/profile" element={<Profile />} />
+            <Route exact path="/quiz/:id" element={<Quiz />} />
+          </Route>
+          <Route exact path="/signup" element={<Signup />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AppProvider>
     </Router>
   );
 }

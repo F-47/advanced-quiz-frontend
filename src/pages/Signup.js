@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import signUpImg from "../imgs/signUpImg.svg";
 import Alert from "../Alert";
 import { useGlobalContext } from "../context";
+import jwt_decode from 'jwt-decode'
 
 const Signup = () => {
   let [firstname, setfirstname] = useState("");
@@ -19,6 +20,7 @@ const Signup = () => {
     password,
     password2,
   };
+  console.log(user)
   let navigate = useNavigate();
   let handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,17 +77,40 @@ const Signup = () => {
       setShowAlert(true);
     }
   };
+  let handleCallBackResponse = (response) =>{
+    console.log("Encoded JWT ID token: "+response.credential)
+    let userObject = jwt_decode(response.credential)
+    console.log(userObject)
+    setfirstname(userObject.given_name)
+    setlastname(userObject.family_name)
+    setEmail(userObject.email)
+    setEmail(userObject.email)
+    // window.localStorage.setItem("token",response.credential)
+  }
+  useEffect(()=>{
+    /*global google*/
+    google.accounts.id.initialize({
+      client_id : "477329703996-1g44mpobtl4u76u0a4l5f16g75dbpq8c.apps.googleusercontent.com",
+      callback : handleCallBackResponse
+    })
+
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      {theme:"filled_black",size:"medium",text:"continue_with",shape:"pill",type:"Standard"}
+    )
+
+  },[])
   return (
     <div className="signup">
       <div className="container">
         <div className="left">
-     
           <form action="" onSubmit={handleSubmit}>
             <h1>Create Your Account</h1>
             <p>
               Please enter your details to sign up and be part of our great
               community.
             </p>
+        <div id="signInDiv"></div>
             {showAlert && <Alert alertText={alertText} alertType={alertType} />}
             <div className="formFields">
               <label htmlFor="firstname" className="form-label">
