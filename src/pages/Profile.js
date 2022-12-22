@@ -1,5 +1,7 @@
 import React from "react";
 import useFetch from "../useFetch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash} from "@fortawesome/free-solid-svg-icons";
 
 const Profile = () => {
   let token = window.localStorage.getItem("token")
@@ -8,7 +10,15 @@ const Profile = () => {
     return <div className="loading"></div>;
   }
   if (data.data) {
-    let { firstname, lastname, email } = data.data;
+    let { _id,firstname, lastname, email } = data.data;
+    let handleDelete = (id) => {
+      fetch(process.env.REACT_APP_API_URL + "/user/" + id, {
+        method: "DELETE",
+      }).then(() => {
+        window.localStorage.removeItem('token')
+        window.location.href = '/'
+      });
+    };
     return (
       <div className="profile">
         <div className="container">
@@ -62,6 +72,7 @@ const Profile = () => {
                 readOnly
               />
             </div>
+          <div className="delete" onClick={() => handleDelete(_id)}><FontAwesomeIcon icon={faTrash} className="trash" />Delete Account</div>
           </div>
         </div>
       </div>

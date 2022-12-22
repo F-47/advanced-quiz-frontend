@@ -20,7 +20,6 @@ const Signup = () => {
     password,
     password2,
   };
-  console.log(user)
   let navigate = useNavigate();
   let handleSubmit = async (e) => {
     e.preventDefault();

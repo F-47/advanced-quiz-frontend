@@ -543,4 +543,15 @@ form .formFields .box .question input {
   cursor: no-drop;
   width: fit-content;
 }
+.profile .delete {
+  color: red;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.profile .delete svg{
+  margin-right: 5px;
+}
+.profile .delete:hover{
+  color: rgb(241, 101, 101);
+}
 /* End Profile */
