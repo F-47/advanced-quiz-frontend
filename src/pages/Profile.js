@@ -1,22 +1,22 @@
 import React from "react";
-import useFetch from "../useFetch";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash} from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useGlobalContext } from "../utils/context";
 
 const Profile = () => {
-  let token = window.localStorage.getItem("token")
-  let {isPending, data } = useFetch(process.env.REACT_APP_API_URL + "/profile/"+token);
+  let {data,isPending} = useGlobalContext()
   if (isPending) {
     return <div className="loading"></div>;
   }
-  if (data.data) {
-    let { _id,firstname, lastname, email } = data.data;
+  if (data.result1 && data.result2) {
+    let { _id, firstname, lastname, email } = data.result1;
     let handleDelete = (id) => {
       fetch(process.env.REACT_APP_API_URL + "/user/" + id, {
         method: "DELETE",
       }).then(() => {
-        window.localStorage.removeItem('token')
-        window.location.href = '/'
+        window.localStorage.removeItem("token");
+        window.location.href = "/";
       });
     };
     return (
@@ -57,6 +57,27 @@ const Profile = () => {
               </div>
             </div>
           </div>
+          <div className="quizesTaken">
+            <div className="title">Quizes Taken:</div>
+            {data.result2.length !== 0 ? (
+              data.result2.map((quiz) => {
+                let { quizTitle, quizID } = quiz;
+                return (
+                  <div className="quizProfile" key={quiz._id}>
+                    <div className="quizName">{quizTitle}</div>
+                    <Link
+                      className="results"
+                      to={"/quiz/" + quizID + "/results"}
+                    >
+                      See Results
+                    </Link>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="notFound">Nothing here to see</div>
+            )}
+          </div>
           <div className="security">
             <div className="title">Security</div>
             <div className="formFields">
@@ -72,7 +93,10 @@ const Profile = () => {
                 readOnly
               />
             </div>
-          <div className="delete" onClick={() => handleDelete(_id)}><FontAwesomeIcon icon={faTrash} className="trash" />Delete Account</div>
+            <div className="delete" onClick={() => handleDelete(_id)}>
+              <FontAwesomeIcon icon={faTrash} className="trash" />
+              Delete Account
+            </div>
           </div>
         </div>
       </div>

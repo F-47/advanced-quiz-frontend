@@ -303,6 +303,31 @@ form .formFields .box .question input {
   border-radius: 10px;
   box-shadow: 0px 0px 100px 17px #eeeeee;
 }
+.quizesTaken .quizProfile{
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 100px 17px #eeeeee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.quizesTaken .quizProfile .quizName{
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.quizesTaken .quizProfile .results{
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  padding: 3px 7px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.quizesTaken .notFound{
+  font-size: 17px;
+}
 .quiz .cardImage {
   position: relative;
 }
@@ -432,6 +457,18 @@ form .formFields .box .question input {
   font-size: 30px;
   font-weight: bold;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.score .results{
+  font-size: 20px;
+  color: white;
+  background-color: var(--secondary-color);
+  width: fit-content;
+  margin: 10px auto;
+  padding: 5px 20px;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 /* Error Page  */
@@ -515,7 +552,7 @@ form .formFields .box .question input {
   background-color: rgb(241, 241, 241);
   height: calc(100vh - 99px);
 }
-.profile .generalInfo,.profile .security{
+.profile .generalInfo,.profile .security,.profile .quizesTaken{
   background-color: white;
   padding: 25px;
 }
@@ -555,3 +592,23 @@ form .formFields .box .question input {
   color: rgb(241, 101, 101);
 }
 /* End Profile */
+
+/* Start UserResults  */
+.userResults{
+  height: 100vh;
+  background-color: rgb(241, 241, 241);
+}
+.userResults .box{
+  background-color: white;
+  margin-top: 20px;
+  padding: 20px;
+  font-size: 22px;
+}
+.userResults .box .answers{
+  margin-left: 10px;
+  padding: 10px 0;
+}
+.userResults .box .answer{
+  margin-top: 10px;
+}
+/* End UserResults  */

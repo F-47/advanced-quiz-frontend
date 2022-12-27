@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import Alert from "../Alert";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../utils/context";
 
 const CreateQuiz = () => {
-  let {showAlert,setShowAlert,alertText,setAlertText} = useGlobalContext()
+  let {showAlert,setShowAlert,alertText,setAlertText,data} = useGlobalContext()
   let [quizTitle, setQuizTitle] = useState("");
   let [quizDesc, setQuizDesc] = useState("");
   let [quizPassword, setQuizPassword] = useState("");
@@ -23,12 +23,14 @@ const CreateQuiz = () => {
   let navigate = useNavigate();
   let handleSubmit = async (e) => {
     e.preventDefault();
+    let email = data.result1.email
     let quiz = {
       quizTitle,
       quizDesc,
       quizPassword,
       questions,
-      quizTime
+      quizTime,
+      email
     };
     let response = await fetch(process.env.REACT_APP_API_URL + "/quiz", {
       method: "Post",

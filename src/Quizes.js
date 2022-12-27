@@ -4,7 +4,7 @@ import { faPlay, faTrash, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import noData from "./imgs/noData.svg";
 import Alert from "./Alert";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "./utils/context";
 
 let Quizes = ({ quizes, setQuizes }) => {
   let {showAlert,setShowAlert,isLoading,setIsLoading} = useGlobalContext()

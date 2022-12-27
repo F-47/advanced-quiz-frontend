@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import signUpImg from "../imgs/signUpImg.svg";
 import Alert from "../Alert";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../utils/context";
 import jwt_decode from 'jwt-decode'
 
 const Signup = () => {

@@ -1,5 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../utils/context";
+
 const PrivateRoutes = () => {
   let {setShowAlert,setAlertText,setAlertType} = useGlobalContext();
   let auth = { token: window.localStorage.getItem("token") };

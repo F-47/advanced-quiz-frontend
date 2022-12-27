@@ -8,8 +8,9 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+import Results from "./Results";
 import PrivateRoutes from "./utils/PrivateRoutes";
-import { AppProvider } from "./context";
+import { AppProvider } from "./utils/context";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/createQuiz" element={<CreateQuiz />} />
             <Route exact path="/profile/:token" element={<Profile />} />
             <Route exact path="/quiz/:id" element={<Quiz />} />
+            <Route exact path="/quiz/:id/results" element={<Results />} />
           </Route>
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />

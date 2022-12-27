@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import loginImg from "../imgs/login.svg";
 import Alert from "../Alert";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../utils/context";
 
 const Login = () => {
   let [email, setEmail] = useState("");
