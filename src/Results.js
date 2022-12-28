@@ -9,18 +9,19 @@ const Results = () => {
     process.env.REACT_APP_API_URL + "/quiz/" + id
   );
 
-  let fetchUserAnswers = () => {
-    fetch(process.env.REACT_APP_API_URL + "/quizActivity/" + id, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: window.localStorage.getItem("token") }),
-    })
-      .then((res) => res.json())
-      .then((data) => setUserAnswers(data.userAnswers));
-  };
+  
   useEffect(() => {
+    function fetchUserAnswers(){
+      fetch(process.env.REACT_APP_API_URL + "/quizActivity/" + id, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: window.localStorage.getItem("token") }),
+      })
+        .then((res) => res.json())
+        .then((data) => setUserAnswers(data.userAnswers));
+    };
     fetchUserAnswers();
-  }, []);
+  }, [id]);
   
   if (isPending) {
     return <div className="loading"></div>;
